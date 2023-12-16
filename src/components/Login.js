@@ -3,15 +3,16 @@ import Header from './Header'
 import { CheckValidData } from '../utils/Validate'
 import { createUserWithEmailAndPassword ,updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/Firebase';
-import {useNavigate } from 'react-router-dom';
+//import {useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BG_URL, PHOTO_URL } from '../utils/constants';
 
 const Login = () => {
 
   const [SignInOut ,SetSignInOut] = useState(true);
   const [ErrorMessage , setErrorMessage] = useState(null);
-  const Navigate =useNavigate();
+  //const Navigate =useNavigate();
   const dispatch = useDispatch(); 
   
 
@@ -19,19 +20,20 @@ const Login = () => {
   const email = useRef(null);
   const password =useRef(null);
 
-  const ValidationCheck =()=>{
+  
+      const ValidationCheck =()=>{
       const message = CheckValidData(email.current.value , password.current.value);
       setErrorMessage(message);
       if (message) return ;
 
       if(!SignInOut){
         //SignUp Logic
-         createUserWithEmailAndPassword(auth, email.current.value , password.current.value)
+         createUserWithEmailAndPassword(auth, email.current.value , password.current.value )
           .then((userCredential) => {
           // Signed up 
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHH_sQpaDqCE8OpMKn5BNxBYm3R94wp6iBhbpDSIVNeQ&s"
+            displayName: name.current.value, photoURL: PHOTO_URL  // {PHOTO_URL } Not need to wrap  inside a curly bracket since its not a JSX... 
           }).then(() => {
             // Profile updated!
             // ...
@@ -43,7 +45,7 @@ const Login = () => {
             setErrorMessage(error.message)
           });          
           console.log(user);
-          Navigate('/Browse')
+        //  Navigate('/Browse')
 
           // ...
         })
@@ -59,8 +61,8 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
-          Navigate('/Browse')
+          //console.log(user);
+         // Navigate('/Browse')
 
           // ...
         })
@@ -86,14 +88,14 @@ const Login = () => {
     </div>
 
       <div className='absolute '>
-        <img src='https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/0efe6360-4f6d-4b10-beb6-81e0762cfe81/IN-en-20231030-popsignuptwoweeks-perspective_alpha_website_large.jpg' alt='logo'></img>
+        <img src={BG_URL} alt='logo'></img>
       </div>
 
       <form onClick={(e)=>e.preventDefault()} className=" w-72  mx-auto relative bg-gray-900 top-20 px-2 rounded-lg bg opacity-90">
 
           <h1 className='font-bold text-zinc-100   p-2 '>{SignInOut? "SignIn" : "SignUp"}</h1>
           {
-            !SignInOut && (<input type='type'  placeholder='Name' className='px-2 m-2 rounded-md bg-gray-100'/>)
+            !SignInOut && (<input type='type' ref={name}  placeholder='Name' className='px-2 m-2 rounded-md bg-gray-100'/>)
           }
           <input type='text' ref={email} placeholder='Email or Phone number'  className='px-2 m-2 rounded-md bg-gray-100'  />
           <input type='password' ref={password} placeholder='Password'  className='px-2 m-2 rounded-md bg-gray-100 ' />

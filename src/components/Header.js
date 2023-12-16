@@ -2,30 +2,80 @@ import React from 'react';
 import { auth } from '../utils/Firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { onAuthStateChanged } from 'firebase/auth';
+import { addUser, removeUser } from '../utils/userSlice';
+import { useEffect } from 'react';
+import { LOGO, SUPPORTED_LANG } from '../utils/constants';
+import { toggleGptSearch } from '../utils/gptSearch';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
 
   const user =useSelector(store => store.user);
-  console.log(user);
-  const Navigate =useNavigate();
+ // console.log(user);
+  const navigate =useNavigate();
+  const dispatch = useDispatch();
+  const showGptSearch = useSelector((store)=>store.gpt.ShowGptSearch);
+  
+
+  useEffect(()=>{
+   const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const {uid, email , DisplayName,photoURL} = user;
+        dispatch(addUser(
+          {uid:uid ,
+           email:email , 
+           DisplayName:DisplayName,
+           photoURL:photoURL}
+          ))
+          navigate("/Browse")
+          
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        dispatch(removeUser());
+        navigate("/")
+      }
+    });
+    return()=>unsubscribe();
+  },[])
+
   const HandleSignOut=()=>{
     signOut(auth).then(() => {
       // Sign-out successful.
-      Navigate("/");
+     // navigate("/");
     }).catch((error) => {
       // An error happened.
-      Navigate("/error")
+      navigate("/error")
     });
   }
 
+  const HandleGPT_Search=()=>{
+    dispatch(toggleGptSearch())
+  };
+
+  const handlechangeLanguage=(e)=>{
+    dispatch(changeLanguage(e.target.value));
+  }
+
   return (
-    <div className='absolute z-30 flex justify-between' >
-      <img className='w-40  bg-gradient-to-b from-slate-700' src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' alt='logo'/>
+    <div className='absolute z-30 flex justify-between w-full'  >
+      <img className='w-40  bg-gradient-to-b from-slate-700' src={LOGO} alt='logo'/>
       {user &&
-      <div className='flex'>
-        <img className='h-12 w-12' src={user ? user.photoURL : null}/>
-        <button onClick={HandleSignOut} className='bg-red-700 h-7 my-5 mx-96 '>SignOut</button>
+      <div className='flex justify-items-end p-3'>
+     {  showGptSearch &&
+       <select className='h-7 mt-3 rounded-md bg-slate-900 text-gray-50' onChange={handlechangeLanguage} >
+          { SUPPORTED_LANG.map((Lang)=><option key={Lang.identifier} value={Lang.identifier}>{Lang.name}</option>) }
+       </select>
+      }
+      <button className='px-1 mt-2 h-8 mx-1 bg-fuchsia-400 text-gray-50 rounded-lg'
+        onClick={HandleGPT_Search}>{showGptSearch?"Home":"GPT Search"}</button>
+        <img className='h-10 w-10 rounded-md ' src={user ? user.photoURL : null}/>
+        <button onClick={HandleSignOut} className='bg-red-700 h-6 my-3 rounded-lg '>SignOut</button>
       </div>}
       
     </div>
