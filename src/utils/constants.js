@@ -5,7 +5,8 @@ export const API_MOVIES_OPTIONS = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer' + process.env.REACT_APP_Authorization_TMDB_KEY 
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZGI2NzkyNjIwZGY0NTc3Y2M4YTdhYjUxODgwMjhiYiIsInN1YiI6IjY1N2VlMTgwOTA0ZjZkMDcwOTdmYTM3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.n_jq0Bo_QpYryNFIlFqqfC_HmECPd7IFfK3MMYdMR4Y'
+
     }
   };
 
@@ -20,5 +21,5 @@ export const API_MOVIES_OPTIONS = {
     {identifier:"punjabi" , name:"Punjabi"},
   ];
 
-  export const OPENAI_GPT_KEY =process.REACT_APP_OPENAI_GPT_KEY ;
+  export const OPENAI_GPT_KEY = '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' ;
    // env file used for security purpose by the way hacker not attacked my key which most important ...

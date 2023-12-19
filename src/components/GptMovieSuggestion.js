@@ -8,7 +8,7 @@ const GptMovieSuggestion = () => {
      console.log(gptMoviesList);
      console.log(tmdbResults);
 
-     if(!MovieList) return null ;
+     if(!gptMoviesList) return null 
   return (
     <div className= ' m-1 p-1 bg-black opacity-80'>
        

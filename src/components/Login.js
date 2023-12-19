@@ -87,20 +87,20 @@ const Login = () => {
       <Header/>
     </div>
 
-      <div className='absolute '>
-        <img src={BG_URL} alt='logo'></img>
+      <div className='absolute  '>
+        <img className=' h-screen md:h-full object-cover md: ' src={BG_URL} alt='logo'></img>
       </div>
 
-      <form onClick={(e)=>e.preventDefault()} className=" w-72  mx-auto relative bg-gray-900 top-20 px-2 rounded-lg bg opacity-90">
+      <form onClick={(e)=>e.preventDefault()} className="w-full md:w-72 mx-auto relative bg-gray-900 top-28 px-2 rounded-lg bg opacity-90">
 
           <h1 className='font-bold text-zinc-100   p-2 '>{SignInOut? "SignIn" : "SignUp"}</h1>
           {
-            !SignInOut && (<input type='type' ref={name}  placeholder='Name' className='px-2 m-2 rounded-md bg-gray-100'/>)
+            !SignInOut && (<input type='type' ref={name}  placeholder='Name' className='w-[95%] md:w-auto px-2 m-2 rounded-md bg-gray-100'/>)
           }
-          <input type='text' ref={email} placeholder='Email or Phone number'  className='px-2 m-2 rounded-md bg-gray-100'  />
-          <input type='password' ref={password} placeholder='Password'  className='px-2 m-2 rounded-md bg-gray-100 ' />
+          <input type='text' ref={email} placeholder='Email or Phone number'  className='w-[95%] md:w-auto px-2 m-2 rounded-md bg-gray-100'  />
+          <input type='password' ref={password} placeholder='Password'  className=' w-[95%] md:w-auto px-2 m-2 rounded-md bg-gray-100 ' />
           <p className=' px-2 m-2 text-red-600 text-sm'>{ErrorMessage}</p>
-          <button onClick={ValidationCheck}  className=' px-2 m-2 w-64 rounded-md bg-rose-600  '>{SignInOut?"Login" : "SignUp"}</button>
+          <button onClick={ValidationCheck}  className='w-[95%] md:w-[95%] px-2 m-2  rounded-md bg-rose-600  '>{SignInOut?"Login" : "SignUp"}</button>
           <button className='text-slate-50  m-2 font-semibold text-sm cursor-pointer' onClick={SignHandle}> {SignInOut ? "New to Netflix ? Sign up now." : "Allready register ? SignIn Now."}</button>
       </form>
     </div>
