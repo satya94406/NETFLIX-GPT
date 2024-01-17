@@ -21,5 +21,5 @@ export const API_MOVIES_OPTIONS = {
     {identifier:"punjabi" , name:"Punjabi"},
   ];
 
-  export const OPENAI_GPT_KEY = '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' ;
+  export const OPENAI_GPT_KEY = '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' ;
    // env file used for security purpose by the way hacker not attacked my key which most important ...
