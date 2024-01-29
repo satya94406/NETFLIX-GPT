@@ -11,7 +11,7 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
   const searchText = useRef(null);
   const lang_key = useSelector((store)=>store.config.lang) ;
-
+  console.log(lang_key);
   const searchMovieTMDB = async(movie)=>{
     const data = await fetch("https://api.themoviedb.org/3/search/movie?query="+movie+"&include_adult=false&language=en-US&page=1",API_MOVIES_OPTIONS);
     const json = await data.json();
@@ -22,7 +22,7 @@ const GptSearchBar = () => {
       console.log(searchText.current.value);
       //make an api call to gpt api and get movie results  
 
-      const gptQuery = "Act as a movie recommendation system and suggest sone movies for the uery"+
+      const gptQuery = "Act as a movie recommendation system and suggest sone movies for the query"+
               searchText.current.value +
               "only give me name of 5 movies with separated by commas(,) like don , dhammal , ravan , sholay , gadar"
 

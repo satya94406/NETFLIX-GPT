@@ -9,12 +9,13 @@ import SecondaryContainer from './SecondaryContainer'
 import usePopularMovies from '../CustomHooks/usePopularMovies'
 import GPT_Search from './GPT_Search.js'
 import { useSelector } from 'react-redux'
+import useTrailerVideo from '../CustomHooks/useTrailerVideo.js'
 
 const Browse = () => {
   const ShowGptSearch = useSelector((store)=>store.gpt.ShowGptSearch);
   useAddPlayingMovies();
   usePopularMovies();
-
+  
   return (
     <div>
         <Header/>
