@@ -8,7 +8,7 @@ const gptSlice = createSlice({
         tmdbResults : null ,
     },
     reducers:{
-        toggleGptSearch :(state,action)=>{
+        toggleGptSearch :(state)=>{
             state.ShowGptSearch = !state.ShowGptSearch ;
         },
         addGptMovieResults:(state,action)=>{

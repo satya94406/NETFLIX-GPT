@@ -16,7 +16,7 @@ const useTrailerVideo = (movie_id) => {
      console.log(json);
   //dispatch(addNowPlayingMovies(json.results))
      const filterData = json.results.filter((video)=>video.type==="Trailer");
-     const trailer = filterData.length ? filterData[0] : json.results[0];
+     const trailer = filterData ? filterData[0] : json.results[0];
      console.log(trailer);
     // setTrailerId(trailer.key);
      //use trailerId in API instead trailerVideo.key

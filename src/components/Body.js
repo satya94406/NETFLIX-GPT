@@ -3,6 +3,7 @@ import Browse from './Browse';
 import Login from './Login';
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
+import ErrorPage from './ErrorPage';
 //import { useDispatch } from 'react-redux';
 //import { auth } from '../utils/Firebase';
 
@@ -13,8 +14,9 @@ const Body = () => {
 
   const appRoute = createBrowserRouter([
      {
-       path:"/NETFLIX-GPT",
-       element:<Login/>
+       path:"/",
+       element:<Login/>,
+       errorElement:<ErrorPage/>
      },
      {
       path:"/Browse",

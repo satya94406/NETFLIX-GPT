@@ -33,14 +33,14 @@ const GptSearchBar = () => {
       if(!openaiResults.choices){
          //error handling page
       }
-     // console.log(openaiResults.choices?.[0]?.message?.content);
-      const gptMoviesList= openaiResults.choices?.[0]?.message?.content.split(",")
+      console.log(openaiResults.choices?.[0]?.message?.content);
+      const gptMoviesList = openaiResults.choices?.[0]?.message?.content.split(",")
       // now results - ["sultan","bajangi",etc upto 5 movies]
       console.log(gptMoviesList)
 
       const promiseArray = gptMoviesList.map((movie)=>searchMovieTMDB(movie)) ;
       //[promise, promise , promise , promise , promise]
-      console.log(promiseArray)
+     //console.log(promiseArray)
 
       const tmdbResults = await Promise.all(promiseArray);
       console.log(tmdbResults);
