@@ -1,13 +1,13 @@
 import React from 'react';
 import Browse from './Browse';
 import Login from './Login';
-import ErrorPage from './ErrorPage'
+import ErrorPage from './ErrorPage';
 import { RouterProvider, createBrowserRouter, Route, Switch } from 'react-router-dom';
 
 const Body = () => {
   const AppRouter = createBrowserRouter([
     {
-      path: "/NETFLIX-GPT",
+      path: "/",
       element: <Login/> ,
       errorElement: <ErrorPage /> // Provide your error page component here
     },
@@ -20,7 +20,7 @@ const Body = () => {
   return (
     <div>
       <RouterProvider router={AppRouter}/>
-      </div>
+    </div>
   );
 }
 
