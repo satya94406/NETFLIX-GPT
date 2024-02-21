@@ -12,21 +12,18 @@ const Body = () => {
   //const dispatch = useDispatch();
   //const navigate = useNavigate();
 
-  const appRoute = createBrowserRouter([
-     {
-       path:"/NETFLIX-GPT",
-       element:<Login/>,
-       errorElement:<ErrorPage/>
-     },
-     {
-      path:"/Browse",
-      element:<Browse/>
-     }
-  ])
+ 
 
   return (
     <div>
-        <RouterProvider router={appRoute}/>
+        <Usercontxt.Provider>
+        <div>
+          <Routes>
+            <Route  path="/NETFLIX-GPT" element={<Login/>} />
+            <Route path="/Browse" element={<Browse/>} />
+          </Routes>
+        </div>
+      </Usercontxt.Provider>
     </div>
   )
 }
