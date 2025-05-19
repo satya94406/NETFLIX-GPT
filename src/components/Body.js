@@ -9,7 +9,7 @@ const Body = () => {
     {
       path: "/",
       element: <Login/> ,
-      errorElement: <ErrorPage /> // Provide your error page component here
+      errorElement: <ErrorPage /> 
     },
     {
       path: "/Browse",
